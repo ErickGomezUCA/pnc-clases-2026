@@ -33,4 +33,14 @@ public class Reviews {
         this.rating = rating;
         this.comment = comment;
     }
+
+    public UUID getId() { return id; }
+    public String getUser() { return user; }
+    public void setUser(String user) { this.user = user; }
+    public Integer getRating() { return rating; }
+    public void setRating(Integer rating) { this.rating = rating; }
+    public String getComment() { return comment; }
+    public void setComment(String comment) { this.comment = comment; }
+    public Game getGame() { return game; }
+    public void setGame(Game game) { this.game = game; }
 }

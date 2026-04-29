@@ -18,11 +18,13 @@ public class Game {
     @Column(nullable = false)
     private String name;
 
-    @Column
-    private String genre;
+    @ElementCollection(targetClass = Genre.class)
+    @CollectionTable(name = "game_genres", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "genre")
+    private List<Genre> genres;
 
     @Column
-    private String classification;
+    private Classification classification;
 
     @Column(name = "game_developer")
     private String dev;
@@ -44,9 +46,9 @@ public class Game {
     public Game() {
     }
 
-    public Game(String name, String genre, String classification, String dev) {
+    public Game(String name, List<Genre> genres, Classification classification, String dev) {
         this.name = name;
-        this.genre = genre;
+        this.genres = genres;
         this.classification = classification;
         this.dev = dev;
     }
@@ -67,19 +69,19 @@ public class Game {
         this.name = name;
     }
 
-    public String getGenre() {
-        return genre;
+    public List<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
-    public String getClassification() {
+    public Classification getClassification() {
         return classification;
     }
 
-    public void setClassification(String classification) {
+    public void setClassification(Classification classification) {
         this.classification = classification;
     }
 

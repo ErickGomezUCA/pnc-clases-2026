@@ -31,4 +31,11 @@ public class Platforms {
         this.name = name;
         this.company = company;
     }
+
+    public UUID getId() { return id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getCompany() { return company; }
+    public void setCompany(String company) { this.company = company; }
+    public List<Game> getGames() { return games; }
 }

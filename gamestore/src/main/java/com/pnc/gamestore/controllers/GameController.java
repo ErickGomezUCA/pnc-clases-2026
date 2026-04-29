@@ -13,36 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController()
+@RestController
 @RequestMapping("game")
 public class GameController {
+    @Autowired private GameService gameService;
 
-    @Autowired
-    private GameService gameService;
-
-    @GetMapping
-    public ResponseEntity<List<Game>> getAll(){
-        return ResponseEntity.ok(gameService.getAll());
-    }
-
-    @GetMapping("/genre")
-    public ResponseEntity<List<Game>> getByGenre(@Param("genre") String genre){
-        return ResponseEntity.ok(gameService.findByGenre(genre));
-    }
-
-    @PostMapping
-    public ResponseEntity<Void> createGame(@RequestBody Game game) {
-        gameService.createGame(game);
-        return ResponseEntity.noContent().build();
-    }
-
-    @QueryMapping
-    public List<Game> allGames() {
-        return gameService.getAll();
-    }
-
-    @QueryMapping
-    public Game gameById(@Argument UUID id) {
-        return gameService.getById(id);
-    }
+    @GetMapping         public ResponseEntity<List<Game>> getAll() { return ResponseEntity.ok(gameService.getAll()); }
+    @GetMapping("/{id}") public ResponseEntity<Game> getById(@PathVariable UUID id) { return ResponseEntity.ok(gameService.getById(id)); }
+    @PostMapping        public ResponseEntity<Game> create(@RequestBody Game game) { return gameService.create(game); }
+    @PutMapping("/{id}") public ResponseEntity<Game> update(@PathVariable UUID id, @RequestBody Game game) { return gameService.update(id, game); }
+    @DeleteMapping("/{id}") public ResponseEntity<Void> delete(@PathVariable UUID id) { return gameService.delete(id); }
 }
